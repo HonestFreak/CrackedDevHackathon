@@ -203,7 +203,7 @@ export default function Home() {
 
       { step === 2 && (
          <>
-         <input type="file" accept="application/pdf" onChange={extractText}/>
+         <div  className="w-full  bg-slate-900 p-3 text-sm"> Upload Your Resume <input type="file" accept="application/pdf" onChange={extractText}/></div>
          <div onClick={resume_analyze} className="bg-green-800 w-full p-3 text-center rounded-b-lg cursor-pointer"> RESUME MODIFICATION SUGGESTION </div>
         </>
       )}

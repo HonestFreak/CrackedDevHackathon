@@ -1,7 +1,6 @@
 import google.generativeai as genai
 from fastapi import FastAPI
 import os
-import requests 
 from dotenv import load_dotenv
 from pathlib import Path
 from fastapi.middleware.cors import CORSMiddleware
@@ -48,7 +47,7 @@ def initiate(job_description: str, session_id: str):
     history = [ {'role':'user',
                         'parts':[job_description]}, {'role':'model','parts':[init.text]} ]
 
-    message = "Analyze and judge my current job level preparedness for the above job by asking me questions. Example : When working with Tailwind CSS in a React project, how would you style a button component to have a primary color and rounded corners? " 
+    message = "Roleplay as a interview coach, to Analyze and judge my current job level preparedness for the above job by asking me techincal questions. those will be such that you can evaluate my current level based on answers to prepare a roadmap for me. DOn't give answers, wait for use to reply Example : When working with Tailwind CSS in a React project, how would you style a button component to have a primary color and rounded corners? " 
     
     chat = gemini.start_chat(history=history)
     ans =  chat.send_message(message).text
@@ -81,6 +80,7 @@ def skill_test(session_id: str, answers: str, days_left: int):
 now judge these answers , and based on that tell my job level preparedness.
 Based on that give me a roadmap to prepare if my job interview is in""" + str(days_left) + """ days
 Feel free to give resources and their links , sites , articles , demos , github , youtube videos anything
+Keep it step by step and give detailed plan for each day. Use emojis to make it more interactive.
 """
     message = answers + " " + suffix
     chat = gemini.start_chat(history=current_history)
